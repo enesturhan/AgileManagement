@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyAuthServer.Core.Dtos
+namespace AgileManagement.Core.Dtos
 {
     public class LoginDto
     {

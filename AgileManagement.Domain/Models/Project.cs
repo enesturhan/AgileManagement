@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgileManagement.Domain
+namespace AgileManagement.Domain.Models
 {
     public class Project:Entity
     {

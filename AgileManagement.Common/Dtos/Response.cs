@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace SharedLibrary.Dtos
+namespace Common.Dtos
 {
     public class Response<T> where T:class
     {

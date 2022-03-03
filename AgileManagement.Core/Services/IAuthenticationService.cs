@@ -1,12 +1,12 @@
-﻿using SharedLibrary.Dtos;
+﻿using AgileManagement.Core.Dtos;
+using Common.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UdemyAuthServer.Core.Dtos;
 
-namespace AgileManagement.Core
+namespace AgileManagement.Core.Services
 {
 
     /// <summary>

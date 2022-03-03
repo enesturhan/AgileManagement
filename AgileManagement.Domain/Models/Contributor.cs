@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgileManagement.Domain
+namespace AgileManagement.Domain.Models
 {
     /// <summary>
     /// Bu contributor projeye olan isteği beklemede mi mail adresinden onaylamadımı

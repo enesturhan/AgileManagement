@@ -1,11 +1,12 @@
-﻿using AgileManagement.Domain;
+﻿using AgileManagement.Domain.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace AgileManagement.Persistence.EF
 {
@@ -16,19 +17,34 @@ namespace AgileManagement.Persistence.EF
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer(@"Server=(LocalDB)\MSSQLLocalDB;Database=AgileManagementDb;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-G9N5CHK\ENESSQL;Database=AgileManagamentDb;Trusted_Connection=True;");
 
             return new AppDbContext(optionsBuilder.Options);
         }
     }
 
-    public class AppDbContext : DbContext
-    {
-        public DbSet<Project> Projects { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
+
+
+    /// <summary>
+    /// Katmanlı mimari ile çalışırken ilgili katmandan migration alma işlemleri vs gibi durumlarda UserDbContextFactory ile dbContext ayağa kaldırılır. Production ortamında gerek kalmaz. Microsoft.EntityFrameworkCore.Design katmanlı mimari de bu paketi indirelim ve aşağıdaki gibi DbContext class olduğu yere IDesignTimeDbContextFactory implemente olan bir FactoryContext yazalım 
+    /// ilgili proje katmanını seçip migration uygularız.
+    /// </summary>
+    public class AppDbContext : IdentityDbContext<UserApp, IdentityRole, string>
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+
         {
 
+        }
+
+        public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+
+            base.OnModelCreating(builder);
         }
     }
 }
